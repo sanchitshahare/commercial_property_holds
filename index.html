@@ -105,9 +105,14 @@
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column; justify-content: center;
-    padding-top: 120px;
+    padding: 140px 6vw;
     position: relative;
     overflow: hidden;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hero-content {
+    max-width: 900px;
   }
   .hero-grid-bg {
     position: absolute; inset: 0; pointer-events: none;
@@ -140,19 +145,19 @@
     text-transform: uppercase;
     padding: 6px 14px;
     border-radius: 100px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     width: fit-content;
     animation: fadeSlideUp 0.6s ease both;
   }
   .hero-tag-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
   .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(2.25rem, 8vw, 4rem);
     font-weight: 800;
-    line-height: 1;
+    line-height: 1.2;
     letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-    max-width: 800px;
+    margin-bottom: 2rem;
+    max-width: 900px;
     animation: fadeSlideUp 0.7s 0.1s ease both;
   }
   .hero h1 em {
@@ -168,17 +173,18 @@
     opacity: 0.4;
   }
   .hero-sub {
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     color: var(--text2);
-    max-width: 520px;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 2rem;
     font-weight: 300;
     animation: fadeSlideUp 0.7s 0.2s ease both;
   }
   .hero-actions {
     display: flex; align-items: center; gap: 1rem;
     flex-wrap: wrap;
+    margin-top: 2rem;
     animation: fadeSlideUp 0.7s 0.3s ease both;
   }
   .btn-primary {
@@ -215,7 +221,7 @@
   .hero-stats {
     display: flex; align-items: center; gap: 3rem;
     margin-top: 4rem;
-    padding-top: 2.5rem;
+    padding-top: 3rem;
     border-top: 1px solid var(--border);
     animation: fadeSlideUp 0.7s 0.4s ease both;
   }
@@ -793,8 +799,9 @@
 
   /* RESPONSIVE */
   @media (max-width: 1024px) {
-    section { padding: 80px 4vw; }
+    section { padding: 100px 4vw; }
     nav { padding: 0 4vw; }
+    .hero { padding: 120px 4vw; }
     .properties-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -811,14 +818,14 @@
   }
   @media (max-width: 768px) {
     body { font-size: 15px; }
-    section { padding: 60px 4vw; }
+    section { padding: 80px 4vw; }
     nav { padding: 0 4vw; height: 60px; }
     .nav-logo { font-size: 1.1rem; }
-    .hero { padding-top: 100px; }
-    .hero h1 { font-size: clamp(1.75rem, 5vw, 3.5rem); margin-bottom: 1rem; }
-    .hero-sub { font-size: 1rem; margin-bottom: 1.5rem; }
-    .hero-actions { gap: 0.75rem; }
-    .btn-primary, .btn-secondary { padding: 12px 20px; font-size: 0.85rem; }
+    .hero { padding: 100px 4vw; }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: 1.5rem; line-height: 1.2; }
+    .hero-sub { font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .hero-actions { gap: 1rem; margin-top: 1.5rem; }
+    .btn-primary, .btn-secondary { padding: 12px 24px; font-size: 0.85rem; }
     .properties-grid { grid-template-columns: 1fr; gap: 1rem; }
     .features-grid { grid-template-columns: 1fr; }
     .feature-card { padding: 1.5rem; }
@@ -831,19 +838,19 @@
     .footer-bottom { flex-direction: column; align-items: flex-start; }
   }
   @media (max-width: 600px) {
-    section { padding: 50px 3vw; }
-    nav { padding: 0 3vw; height: 55px; }
+    section { padding: 70px 4vw; }
+    nav { padding: 0 4vw; height: 55px; }
     body { font-size: 14px; }
     .nav-logo { font-size: 1rem; }
     .nav-cta { padding: 6px 14px; }
-    .hero { padding-top: 80px; min-height: auto; }
-    .hero h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); line-height: 1.2; margin-bottom: 0.75rem; }
-    .hero-sub { font-size: 0.9rem; margin-bottom: 1.25rem; }
-    .hero-tag { padding: 5px 12px; font-size: 0.65rem; margin-bottom: 1rem; }
-    .btn-primary, .btn-secondary { padding: 10px 16px; font-size: 0.8rem; }
-    .hero-actions { flex-direction: column; width: 100%; }
+    .hero { padding: 100px 4vw; min-height: auto; }
+    .hero h1 { font-size: clamp(1.75rem, 5.5vw, 2.75rem); line-height: 1.2; margin-bottom: 1rem; }
+    .hero-sub { font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .hero-tag { padding: 6px 14px; font-size: 0.65rem; margin-bottom: 1.5rem; }
+    .btn-primary, .btn-secondary { padding: 12px 20px; font-size: 0.85rem; }
+    .hero-actions { flex-direction: column; width: 100%; gap: 0.75rem; margin-top: 1.5rem; }
     .btn-primary, .btn-secondary { width: 100%; }
-    .hero-stats { flex-direction: column; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; }
+    .hero-stats { flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; padding-top: 2rem; }
     .hero-stat-val { font-size: 1.5rem; }
     .hero-stat-label { font-size: 0.7rem; }
     .ticker-item { font-size: 0.6rem; }
@@ -873,12 +880,13 @@
     .modal-title { font-size: 1.1rem; }
   }
   @media (max-width: 480px) {
-    section { padding: 40px 2.5vw; }
-    nav { padding: 0 2.5vw; }
-    .hero h1 { font-size: clamp(1.25rem, 4vw, 2rem); }
-    .hero-sub { font-size: 0.85rem; }
-    .btn-primary, .btn-secondary { padding: 8px 14px; font-size: 0.75rem; }
-    .hero-stats { gap: 0.75rem; margin-top: 1.5rem; }
+    section { padding: 60px 4vw; }
+    nav { padding: 0 4vw; }
+    .hero { padding: 80px 4vw; }
+    .hero h1 { font-size: clamp(1.5rem, 5vw, 2.25rem); line-height: 1.25; }
+    .hero-sub { font-size: 0.9rem; line-height: 1.6; }
+    .btn-primary, .btn-secondary { padding: 11px 18px; font-size: 0.8rem; }
+    .hero-stats { gap: 1rem; margin-top: 2rem; }
     .hero-stat-val { font-size: 1.25rem; }
   }
 </style>
@@ -906,42 +914,43 @@
   <div class="hero-orb1"></div>
   <div class="hero-orb2"></div>
 
-  <div class="hero-tag">
-    <div class="hero-tag-dot"></div>
-    Now live — Commercial land shares from ₹5,000
-  </div>
-
-  <h1>Own a piece of<br><em>tomorrow's</em> land<br>today.</h1>
-
-  <p class="hero-sub">Fractional investment in premium commercial plots across India's fastest-growing corridors. Earn rental yield, capital appreciation — all from one dashboard.</p>
-
-  <div class="hero-actions">
-    <a href="#properties" class="btn-primary">
-      Explore Properties
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-    <a href="#pricing" class="btn-secondary">View Plans</a>
-  </div>
-
-  <div class="hero-stats">
-    <div>
-      <div class="hero-stat-val">₹240<span>Cr+</span></div>
-      <div class="hero-stat-label">Assets Under Management</div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Now live — Commercial land shares from ₹5,000
     </div>
-    <div style="width:1px;height:40px;background:var(--border)"></div>
-    <div>
-      <div class="hero-stat-val">18,400<span>+</span></div>
-      <div class="hero-stat-label">Active Investors</div>
+
+    <h1>Own a piece of<br><em>tomorrow's</em> land<br>today.</h1>
+
+    <p class="hero-sub">Fractional investment in premium commercial plots across India's fastest-growing corridors. Earn rental yield, capital appreciation — all from one dashboard.</p>
+
+    <div class="hero-actions">
+      <a href="#properties" class="btn-primary">
+        Explore Properties
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
-    <div style="width:1px;height:40px;background:var(--border)"></div>
-    <div>
-      <div class="hero-stat-val">14.2<span>%</span></div>
-      <div class="hero-stat-label">Avg. Annual Returns</div>
-    </div>
-    <div style="width:1px;height:40px;background:var(--border)"></div>
-    <div>
-      <div class="hero-stat-val">47<span></span></div>
-      <div class="hero-stat-label">Properties Funded</div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-val">₹240<span>Cr+</span></div>
+        <div class="hero-stat-label">Assets Under Management</div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div>
+        <div class="hero-stat-val">18,400<span>+</span></div>
+        <div class="hero-stat-label">Active Investors</div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div>
+        <div class="hero-stat-val">14.2<span>%</span></div>
+        <div class="hero-stat-label">Avg. Annual Returns</div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div>
+        <div class="hero-stat-val">47<span></span></div>
+        <div class="hero-stat-label">Properties Funded</div>
+      </div>
     </div>
   </div>
 </section>
