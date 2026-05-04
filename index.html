@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TerraVault — Fractional Land Investment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C0F;
+    --bg2: #0D1318;
+    --bg3: #131B22;
+    --bg4: #1A2530;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00D4A0;
+    --accent2: #00A87D;
+    --accent3: rgba(0,212,160,0.12);
+    --gold: #D4A200;
+    --gold2: rgba(212,162,0,0.12);
+    --text: #E8EDF2;
+    --text2: #8B96A0;
+    --text3: #5A6470;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw;
+    height: 70px;
+    background: rgba(8,12,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent);
+    color: #000 !important;
+    font-weight: 500 !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: all 0.2s !important;
+  }
+  .nav-cta:hover { background: #00FFBF !important; transform: translateY(-1px); }
+
+  /* SECTIONS */
+  section { padding: 100px 6vw; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0,212,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,160,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 80%);
+  }
+  .hero-orb1 {
+    position: absolute; top: 20%; left: 60%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,160,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-orb2 {
+    position: absolute; bottom: 10%; left: 30%;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,162,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent3);
+    border: 1px solid rgba(0,212,160,0.25);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    width: fit-content;
+    animation: fadeSlideUp 0.6s ease both;
+  }
+  .hero-tag-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    animation: fadeSlideUp 0.7s 0.1s ease both;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+  .hero-sub {
+    font-size: 1.125rem;
+    color: var(--text2);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeSlideUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; align-items: center; gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeSlideUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: #00FFBF; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,160,0.3); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--text3); background: var(--bg3); }
+
+  .hero-stats {
+    display: flex; align-items: center; gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    animation: fadeSlideUp 0.7s 0.4s ease both;
+  }
+  .hero-stat-val {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+  .hero-stat-val span { color: var(--accent); }
+  .hero-stat-label {
+    font-size: 0.8rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+
+  /* SCROLL TICKER */
+  .ticker-wrap {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    overflow: hidden;
+  }
+  .ticker-inner {
+    display: flex; gap: 3rem;
+    animation: ticker 25s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text2);
+    letter-spacing: 0.04em;
+  }
+  .ticker-item b { color: var(--accent); font-weight: 500; }
+  .ticker-item .up { color: #00D4A0; }
+  .ticker-item .down { color: #FF6B5B; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    display: block; width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text2);
+    max-width: 500px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* FEATURES */
+  .features { background: var(--bg); }
+  .features-header { margin-bottom: 4rem; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .feature-card {
+    background: var(--bg);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature-card:hover { background: var(--bg2); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--accent3);
+    border: 1px solid rgba(0,212,160,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  .feature-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .feature-card p { font-size: 0.875rem; color: var(--text2); line-height: 1.7; font-weight: 300; }
+
+  /* PROPERTIES */
+  .properties { background: var(--bg2); }
+  .properties-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .properties-filters {
+    display: flex; gap: 0.5rem;
+  }
+  .filter-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-family: var(--font-body);
+    transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--accent3);
+    border-color: rgba(0,212,160,0.3);
+    color: var(--accent);
+  }
+  .properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  .property-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .property-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .property-img {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  .property-img-inner {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .property-card:hover .property-img-inner { transform: scale(1.05); }
+  .property-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7));
+  }
+  .property-badge {
+    position: absolute; top: 14px; left: 14px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .badge-active { background: rgba(0,212,160,0.2); color: var(--accent); border: 1px solid rgba(0,212,160,0.3); }
+  .badge-new { background: rgba(212,162,0,0.2); color: var(--gold); border: 1px solid rgba(212,162,0,0.3); }
+  .badge-sold { background: rgba(255,107,91,0.2); color: #FF6B5B; border: 1px solid rgba(255,107,91,0.3); }
+  .property-roi {
+    position: absolute; bottom: 14px; right: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .property-body { padding: 1.5rem; }
+  .property-location {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .property-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .property-meta {
+    display: flex; gap: 1.5rem; margin-bottom: 1.25rem;
+  }
+  .property-meta-item { }
+  .property-meta-label { font-size: 0.72rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .property-meta-val { font-family: var(--font-mono); font-size: 0.9rem; color: var(--text); font-weight: 500; }
+  .progress-wrap { margin-bottom: 1rem; }
+  .progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; color: var(--text3); margin-bottom: 6px;
+  }
+  .progress-bar { height: 4px; background: var(--bg4); border-radius: 2px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    transition: width 1s ease;
+  }
+  .property-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .min-invest { font-size: 0.8rem; color: var(--text2); }
+  .min-invest b { color: var(--text); font-weight: 500; }
+  .invest-btn {
+    background: var(--accent3);
+    border: 1px solid rgba(0,212,160,0.25);
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .invest-btn:hover { background: var(--accent); color: #000; }
+
+  /* PRICING */
+  .pricing { background: var(--bg); }
+  .pricing-header { text-align: center; margin-bottom: 4rem; }
+  .pricing-header .section-label { justify-content: center; }
+  .pricing-header .section-label::before { display: none; }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .pricing-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); border-color: var(--border2); }
+  .pricing-card.featured {
+    border-color: rgba(0,212,160,0.4);
+    background: linear-gradient(135deg, var(--bg3), rgba(0,212,160,0.04));
+  }
+  .pricing-card.featured::after {
+    content: 'Most Popular';
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--accent);
+    color: #000;
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 100px;
+  }
+  .plan-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .plan-icon.bronze { background: rgba(180,120,60,0.15); }
+  .plan-icon.silver { background: rgba(180,200,220,0.1); }
+  .plan-icon.gold { background: var(--gold2); }
+  .plan-icon.platinum { background: rgba(140,100,220,0.12); }
+  .plan-name {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 0.5rem;
+  }
+  .plan-price {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.25rem;
+  }
+  .plan-price sub { font-size: 0.9rem; font-weight: 400; color: var(--text2); vertical-align: 0; }
+  .plan-period { font-size: 0.8rem; color: var(--text3); margin-bottom: 2rem; }
+  .plan-features { list-style: none; margin-bottom: 2rem; }
+  .plan-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.875rem;
+    color: var(--text2);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-weight: 300;
+  }
+  .plan-features li:last-child { border-bottom: none; }
+  .plan-features li::before {
+    content: '';
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent3);
+    border: 1px solid rgba(0,212,160,0.3);
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%2300D4A0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .plan-features li.muted::before { background-color: var(--bg4); border-color: var(--border); background-image: none; }
+  .plan-features li.muted { color: var(--text3); text-decoration: line-through; }
+  .plan-cta {
+    width: 100%; padding: 13px;
+    border-radius: 8px; font-size: 0.875rem;
+    font-weight: 500; cursor: pointer;
+    font-family: var(--font-body);
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .plan-cta-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border2);
+  }
+  .plan-cta-outline:hover { background: var(--bg4); border-color: var(--text3); }
+  .plan-cta-solid {
+    background: var(--accent);
+    color: #000;
+    border: none;
+  }
+  .plan-cta-solid:hover { background: #00FFBF; box-shadow: 0 4px 20px rgba(0,212,160,0.3); }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--bg2); }
+  .testimonials-header { margin-bottom: 3rem; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .testimonial-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .testimonial-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .testimonial-quote {
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 1rem;
+    font-family: Georgia, serif;
+    opacity: 0.6;
+  }
+  .testimonial-text {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--bg4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent);
+    border: 1px solid rgba(0,212,160,0.2);
+  }
+  .author-name { font-weight: 500; font-size: 0.875rem; margin-bottom: 2px; }
+  .author-meta { font-size: 0.75rem; color: var(--text3); }
+  .stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 0.75rem; }
+
+  /* CONTACT */
+  .contact { background: var(--bg); }
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .contact-info h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .contact-info p { font-size: 0.9rem; color: var(--text2); line-height: 1.8; font-weight: 300; margin-bottom: 2.5rem; }
+  .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-detail-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 1rem 1.25rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .contact-detail-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--accent3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-detail-label { font-size: 0.72rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .contact-detail-val { font-size: 0.875rem; color: var(--text); }
+
+  .contact-form {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.78rem; color: var(--text2); letter-spacing: 0.04em; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    font-weight: 300;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: rgba(0,212,160,0.4);
+    box-shadow: 0 0 0 3px rgba(0,212,160,0.08);
+  }
+  .form-group select { appearance: none; cursor: pointer; }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--text3); }
+
+  .form-submit {
+    width: 100%; padding: 14px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: #00FFBF; box-shadow: 0 4px 20px rgba(0,212,160,0.3); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 4rem 6vw 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand p { font-size: 0.85rem; color: var(--text3); line-height: 1.7; margin-top: 1rem; max-width: 280px; font-weight: 300; }
+  .footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { font-size: 0.85rem; color: var(--text2); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+  .footer-col ul a:hover { color: var(--accent); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: var(--text3); }
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+  .footer-bottom-links a { font-size: 0.8rem; color: var(--text3); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom-links a:hover { color: var(--text2); }
+
+  /* ANIMATIONS */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 440px; width: 90%;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.3s;
+  }
+  .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+  .modal-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+  .modal-close { background: none; border: none; color: var(--text2); font-size: 1.2rem; cursor: pointer; padding: 4px; }
+  .modal-close:hover { color: var(--text); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 70px 5vw; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    TerraVault
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+
+  <div class="hero-tag">
+    <div class="hero-tag-dot"></div>
+    Now live — Commercial land shares from ₹5,000
+  </div>
+
+  <h1>Own a piece of<br><em>tomorrow's</em> land<br>today.</h1>
+
+  <p class="hero-sub">Fractional investment in premium commercial plots across India's fastest-growing corridors. Earn rental yield, capital appreciation — all from one dashboard.</p>
+
+  <div class="hero-actions">
+    <a href="#properties" class="btn-primary">
+      Explore Properties
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#pricing" class="btn-secondary">View Plans</a>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-val">₹240<span>Cr+</span></div>
+      <div class="hero-stat-label">Assets Under Management</div>
+    </div>
+    <div style="width:1px;height:40px;background:var(--border)"></div>
+    <div>
+      <div class="hero-stat-val">18,400<span>+</span></div>
+      <div class="hero-stat-label">Active Investors</div>
+    </div>
+    <div style="width:1px;height:40px;background:var(--border)"></div>
+    <div>
+      <div class="hero-stat-val">14.2<span>%</span></div>
+      <div class="hero-stat-label">Avg. Annual Returns</div>
+    </div>
+    <div style="width:1px;height:40px;background:var(--border)"></div>
+    <div>
+      <div class="hero-stat-val">47<span></span></div>
+      <div class="hero-stat-label">Properties Funded</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker">
+    <div class="ticker-item">PUNE HINJEWADI TECH PARK &nbsp;<b>₹12,400/sqft</b> &nbsp;<span class="up">▲ 3.2%</span></div>
+    <div class="ticker-item">BENGALURU WHITEFIELD &nbsp;<b>₹18,900/sqft</b> &nbsp;<span class="up">▲ 5.1%</span></div>
+    <div class="ticker-item">HYDERABAD ORR ZONE &nbsp;<b>₹9,600/sqft</b> &nbsp;<span class="up">▲ 2.8%</span></div>
+    <div class="ticker-item">CHENNAI OMR CORRIDOR &nbsp;<b>₹8,200/sqft</b> &nbsp;<span class="up">▲ 1.9%</span></div>
+    <div class="ticker-item">MUMBAI PANVEL ZONE &nbsp;<b>₹22,500/sqft</b> &nbsp;<span class="down">▼ 0.4%</span></div>
+    <div class="ticker-item">NOIDA SEC 135 &nbsp;<b>₹7,800/sqft</b> &nbsp;<span class="up">▲ 4.3%</span></div>
+    <div class="ticker-item">PUNE HINJEWADI TECH PARK &nbsp;<b>₹12,400/sqft</b> &nbsp;<span class="up">▲ 3.2%</span></div>
+    <div class="ticker-item">BENGALURU WHITEFIELD &nbsp;<b>₹18,900/sqft</b> &nbsp;<span class="up">▲ 5.1%</span></div>
+    <div class="ticker-item">HYDERABAD ORR ZONE &nbsp;<b>₹9,600/sqft</b> &nbsp;<span class="up">▲ 2.8%</span></div>
+    <div class="ticker-item">CHENNAI OMR CORRIDOR &nbsp;<b>₹8,200/sqft</b> &nbsp;<span class="up">▲ 1.9%</span></div>
+    <div class="ticker-item">MUMBAI PANVEL ZONE &nbsp;<b>₹22,500/sqft</b> &nbsp;<span class="down">▼ 0.4%</span></div>
+    <div class="ticker-item">NOIDA SEC 135 &nbsp;<b>₹7,800/sqft</b> &nbsp;<span class="up">▲ 4.3%</span></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-header">
+    <div class="section-label">Why TerraVault</div>
+    <h2 class="section-title">Built for serious<br>land investors.</h2>
+    <p class="section-sub">No brokers, no hidden fees, no paperwork headaches. Just institutional-grade land investment at your fingertips.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏛️</div>
+      <h3>SEBI-Compliant Structure</h3>
+      <p>All properties are held through an SPV structure, fully registered with SEBI. Your ownership is legally protected and transferable.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">🌐</div>
+      <h3>Blockchain Title Deeds</h3>
+      <p>Every share is tokenized on a permissioned blockchain. No disputes, no forgery — immutable ownership records you can verify any time.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">📈</div>
+      <h3>Dual Income Streams</h3>
+      <p>Earn from both rental lease income (quarterly payouts) and long-term capital appreciation as land values increase.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-3">
+      <div class="feature-icon">🔍</div>
+      <h3>Institutional Due Diligence</h3>
+      <p>Every plot undergoes 148-point legal, environmental, and zoning checks before listing. Our in-house team rejects 94% of properties.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💸</div>
+      <h3>Exit Liquidity</h3>
+      <p>Trade your shares on our internal secondary market within 30 days. No lock-in periods beyond your chosen investment horizon.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">📊</div>
+      <h3>Real-Time Dashboard</h3>
+      <p>Track NAV, distributions, occupancy rates, and comparable sales data for every property in your portfolio — updated daily.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="properties" id="properties">
+  <div class="properties-header">
+    <div>
+      <div class="section-label">Live Listings</div>
+      <h2 class="section-title">Featured Properties</h2>
+    </div>
+    <div class="properties-filters">
+      <button class="filter-btn active" onclick="filterProps('all', this)">All</button>
+      <button class="filter-btn" onclick="filterProps('active', this)">Active</button>
+      <button class="filter-btn" onclick="filterProps('new', this)">New</button>
+    </div>
+  </div>
+
+  <div class="properties-grid" id="propertiesGrid">
+
+    <div class="property-card" data-type="active" onclick="openModal('Hinjewadi Tech Corridor','Pune','₹8.4 Cr','14.8%','₹5,000')">
+      <div class="property-img" style="background: linear-gradient(135deg, #0D2A1A 0%, #0A1F2E 100%);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 300 180" width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#0a1a12"/>
+            <rect x="20" y="100" width="40" height="80" fill="#0D3520" rx="3"/>
+            <rect x="30" y="80" width="20" height="80" fill="#0F4028" rx="3"/>
+            <rect x="70" y="90" width="35" height="90" fill="#0D3520" rx="3"/>
+            <rect x="80" y="70" width="15" height="100" fill="#155234" rx="3"/>
+            <rect x="120" y="60" width="50" height="120" fill="#0D3520" rx="3"/>
+            <rect x="135" y="40" width="20" height="140" fill="#0F4028" rx="3"/>
+            <rect x="185" y="80" width="40" height="100" fill="#0D3520" rx="3"/>
+            <rect x="240" y="95" width="40" height="85" fill="#0D3520" rx="3"/>
+            <rect x="0" y="155" width="300" height="25" fill="#071510"/>
+            <line x1="0" y1="155" x2="300" y2="155" stroke="#00D4A030" stroke-width="1"/>
+            <circle cx="45" cy="95" r="2" fill="#00D4A0" opacity="0.6"/>
+            <circle cx="90" cy="68" r="2" fill="#00D4A0" opacity="0.6"/>
+            <circle cx="140" cy="38" r="2" fill="#00D4A0" opacity="0.8"/>
+            <circle cx="195" cy="75" r="2" fill="#00D4A0" opacity="0.5"/>
+            <circle cx="250" cy="92" r="2" fill="#00D4A0" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="property-img-overlay"></div>
+        <span class="property-badge badge-active">Active</span>
+        <span class="property-roi">14.8% IRR</span>
+      </div>
+      <div class="property-body">
+        <div class="property-location">📍 Hinjewadi, Pune</div>
+        <div class="property-name">Hinjewadi Tech Corridor</div>
+        <div class="property-meta">
+          <div class="property-meta-item">
+            <div class="property-meta-label">Total Size</div>
+            <div class="property-meta-val">4.2 acres</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Plot Value</div>
+            <div class="property-meta-val">₹8.4 Cr</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Tenure</div>
+            <div class="property-meta-val">5 years</div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Funded</span><span>78%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div>
+        </div>
+        <div class="property-foot">
+          <div class="min-invest">Min invest: <b>₹5,000</b></div>
+          <button class="invest-btn">Invest Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card" data-type="new" onclick="openModal('Whitefield Growth Zone','Bengaluru','₹12.1 Cr','16.2%','₹10,000')">
+      <div class="property-img" style="background: linear-gradient(135deg, #1A1A0D 0%, #2E1A0A 100%);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 300 180" width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#12100A"/>
+            <ellipse cx="150" cy="90" rx="200" ry="120" fill="#1A1400" opacity="0.5"/>
+            <rect x="10" y="110" width="280" height="70" fill="#0F0C05"/>
+            <rect x="25" y="75" width="30" height="105" fill="#201800" rx="2"/>
+            <rect x="32" y="60" width="16" height="120" fill="#2A2000" rx="2"/>
+            <rect x="65" y="85" width="25" height="95" fill="#201800" rx="2"/>
+            <rect x="100" y="55" width="45" height="125" fill="#1E1600" rx="2"/>
+            <rect x="115" y="35" width="15" height="145" fill="#2E2200" rx="2"/>
+            <rect x="155" y="70" width="35" height="110" fill="#201800" rx="2"/>
+            <rect x="200" y="80" width="30" height="100" fill="#201800" rx="2"/>
+            <rect x="240" y="90" width="40" height="90" fill="#201800" rx="2"/>
+            <line x1="0" y1="110" x2="300" y2="110" stroke="#D4A20020" stroke-width="1"/>
+            <circle cx="39" cy="57" r="2" fill="#D4A200" opacity="0.8"/>
+            <circle cx="122" cy="32" r="2.5" fill="#D4A200" opacity="0.9"/>
+            <circle cx="160" cy="67" r="2" fill="#D4A200" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="property-img-overlay"></div>
+        <span class="property-badge badge-new">New</span>
+        <span class="property-roi">16.2% IRR</span>
+      </div>
+      <div class="property-body">
+        <div class="property-location">📍 Whitefield, Bengaluru</div>
+        <div class="property-name">Whitefield Growth Zone</div>
+        <div class="property-meta">
+          <div class="property-meta-item">
+            <div class="property-meta-label">Total Size</div>
+            <div class="property-meta-val">6.8 acres</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Plot Value</div>
+            <div class="property-meta-val">₹12.1 Cr</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Tenure</div>
+            <div class="property-meta-val">7 years</div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Funded</span><span>31%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:31%"></div></div>
+        </div>
+        <div class="property-foot">
+          <div class="min-invest">Min invest: <b>₹10,000</b></div>
+          <button class="invest-btn">Invest Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card" data-type="active" onclick="openModal('ORR Industrial Strip','Hyderabad','₹6.7 Cr','13.1%','₹5,000')">
+      <div class="property-img" style="background: linear-gradient(135deg, #0D1A2A 0%, #162030 100%);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 300 180" width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#090F18"/>
+            <rect x="0" y="120" width="300" height="60" fill="#060C14"/>
+            <rect x="15" y="90" width="60" height="90" fill="#0D1E32" rx="2"/>
+            <rect x="25" y="70" width="40" height="110" fill="#122440" rx="2"/>
+            <rect x="85" y="100" width="50" height="80" fill="#0D1E32" rx="2"/>
+            <rect x="95" y="75" width="30" height="105" fill="#122440" rx="2"/>
+            <rect x="145" y="65" width="55" height="115" fill="#0D1E32" rx="2"/>
+            <rect x="160" y="45" width="25" height="135" fill="#142B4D" rx="2"/>
+            <rect x="210" y="85" width="45" height="95" fill="#0D1E32" rx="2"/>
+            <rect x="265" y="100" width="35" height="80" fill="#0D1E32" rx="2"/>
+            <line x1="0" y1="120" x2="300" y2="120" stroke="#378ADD20" stroke-width="1"/>
+            <circle cx="44" cy="67" r="2" fill="#378ADD" opacity="0.7"/>
+            <circle cx="109" cy="72" r="2" fill="#378ADD" opacity="0.6"/>
+            <circle cx="172" cy="42" r="2.5" fill="#378ADD" opacity="0.9"/>
+            <circle cx="232" cy="82" r="2" fill="#378ADD" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="property-img-overlay"></div>
+        <span class="property-badge badge-active">Active</span>
+        <span class="property-roi">13.1% IRR</span>
+      </div>
+      <div class="property-body">
+        <div class="property-location">📍 ORR Zone, Hyderabad</div>
+        <div class="property-name">ORR Industrial Strip</div>
+        <div class="property-meta">
+          <div class="property-meta-item">
+            <div class="property-meta-label">Total Size</div>
+            <div class="property-meta-val">3.1 acres</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Plot Value</div>
+            <div class="property-meta-val">₹6.7 Cr</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Tenure</div>
+            <div class="property-meta-val">4 years</div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Funded</span><span>95%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+        </div>
+        <div class="property-foot">
+          <div class="min-invest">Min invest: <b>₹5,000</b></div>
+          <button class="invest-btn">Invest Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <div class="section-label">Investment Plans</div>
+    <h2 class="section-title">Start small.<br>Scale smart.</h2>
+    <p class="section-sub" style="margin:0 auto">Choose the plan that matches your investment appetite and goals.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <div class="plan-icon bronze">🌱</div>
+      <div class="plan-name">Seedling</div>
+      <div class="plan-price">₹5K <sub>/ share</sub></div>
+      <div class="plan-period">Minimum first investment</div>
+      <ul class="plan-features">
+        <li>Access to all listed properties</li>
+        <li>Quarterly distribution payouts</li>
+        <li>Basic portfolio dashboard</li>
+        <li>Exit via secondary market</li>
+        <li class="muted">Priority allocation</li>
+        <li class="muted">Dedicated advisor</li>
+      </ul>
+      <button class="plan-cta plan-cta-outline">Get Started</button>
+    </div>
+
+    <div class="pricing-card featured reveal reveal-delay-1">
+      <div class="plan-icon silver">🏗️</div>
+      <div class="plan-name">Builder</div>
+      <div class="plan-price">₹1L <sub>/ portfolio</sub></div>
+      <div class="plan-period">Minimum portfolio value</div>
+      <ul class="plan-features">
+        <li>Everything in Seedling</li>
+        <li>Pre-launch property access</li>
+        <li>Advanced analytics & reports</li>
+        <li>Monthly distribution payouts</li>
+        <li>Reduced platform fee (1.2%)</li>
+        <li class="muted">Dedicated advisor</li>
+      </ul>
+      <button class="plan-cta plan-cta-solid">Start Building</button>
+    </div>
+
+    <div class="pricing-card reveal reveal-delay-2">
+      <div class="plan-icon gold">🏆</div>
+      <div class="plan-name">Landowner</div>
+      <div class="plan-price">₹10L <sub>/ portfolio</sub></div>
+      <div class="plan-period">Minimum portfolio value</div>
+      <ul class="plan-features">
+        <li>Everything in Builder</li>
+        <li>Dedicated investment advisor</li>
+        <li>Co-invest in off-market plots</li>
+        <li>Priority exit liquidity</li>
+        <li>Lowest fee tier (0.8%)</li>
+        <li>Quarterly estate report</li>
+      </ul>
+      <button class="plan-cta plan-cta-outline">Apply Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header">
+    <div class="section-label">Investor Stories</div>
+    <h2 class="section-title">Trusted by thousands<br>of smart investors.</h2>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">I've been investing in real estate for 12 years, but always felt priced out of commercial land. TerraVault changed that completely. My portfolio of 4 plots has returned 16.4% in 18 months.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">RK</div>
+        <div>
+          <div class="author-name">Rahul Kulkarni</div>
+          <div class="author-meta">Software Engineer · Pune · ₹8.2L invested</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">The due diligence process TerraVault does is insane. I asked them about a specific corridor in Hyderabad and got a 40-page title report within 24 hours. This is institutional quality.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">PA</div>
+        <div>
+          <div class="author-name">Priya Anand</div>
+          <div class="author-meta">CA & Investor · Bengaluru · ₹21L invested</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Sold half my shares on the secondary market when I needed liquidity. Took exactly 18 days and I got a 22% gain on top of the quarterly distributions I'd already received. Truly passive.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MS</div>
+        <div>
+          <div class="author-name">Manoj Sharma</div>
+          <div class="author-meta">Doctor · Delhi NCR · ₹15L invested</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-info reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2>Let's build your<br>land portfolio.</h2>
+      <p>Talk to one of our investment advisors to understand which properties match your risk appetite and return goals. No pushy sales — just honest guidance.</p>
+      <div class="contact-details">
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon">📧</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-val">invest@terravault.in</div>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon">📞</div>
+          <div>
+            <div class="contact-detail-label">Phone</div>
+            <div class="contact-detail-val">+91 98600 11234</div>
+          </div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="contact-detail-icon">🏢</div>
+          <div>
+            <div class="contact-detail-label">Office</div>
+            <div class="contact-detail-val">Baner Road, Pune, Maharashtra 411045</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal reveal-delay-2">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Rahul">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Sharma">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="rahul@example.com">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 98000 00000">
+      </div>
+      <div class="form-group">
+        <label>Investment Budget</label>
+        <select>
+          <option value="" disabled selected>Select your budget</option>
+          <option>₹5,000 – ₹50,000</option>
+          <option>₹50,000 – ₹2,00,000</option>
+          <option>₹2,00,000 – ₹10,00,000</option>
+          <option>₹10,00,000+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message (optional)</label>
+        <textarea placeholder="Tell us about your investment goals..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit(event)">Send Message & Get a Callback →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="text-decoration:none;color:var(--text)">
+        <div class="nav-logo-dot"></div>
+        TerraVault
+      </a>
+      <p>Fractional ownership in India's most promising commercial land. SEBI-registered, blockchain-secured, 100% transparent.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Browse Properties</a></li>
+        <li><a href="#">Secondary Market</a></li>
+        <li><a href="#">Portfolio Tracker</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Risk Disclosure</a></li>
+        <li><a href="#">SEBI Registration</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TerraVault Technologies Pvt. Ltd. SEBI Reg. No. IN/AIF1/24-25/1234. Investments in land carry risk. Past returns ≠ future performance.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Twitter</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<!-- INVESTMENT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Invest in Property</div>
+      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
+    </div>
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-size:0.8rem;color:var(--text3);margin-bottom:0.25rem" id="modalLoc"></div>
+      <div style="display:flex;gap:2rem;margin-top:1rem;">
+        <div><div style="font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em">Property Value</div><div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600" id="modalVal"></div></div>
+        <div><div style="font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em">Target IRR</div><div style="font-family:var(--font-display);font-size:1.3rem;font-weight:600;color:var(--accent)" id="modalIrr"></div></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Investment Amount (₹)</label>
+      <input type="number" id="modalAmount" placeholder="5000" min="5000" step="1000" oninput="calcShares()">
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:0.72rem;color:var(--text3);margin-bottom:4px">Shares You'll Receive</div><div style="font-family:var(--font-mono);font-size:1.2rem;color:var(--accent)" id="sharesOut">—</div></div>
+      <div><div style="font-size:0.72rem;color:var(--text3);margin-bottom:4px">Est. Annual Income</div><div style="font-family:var(--font-mono);font-size:1.2rem" id="incomeOut">—</div></div>
+    </div>
+    <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('modalOverlay').classList.remove('open')">Proceed to KYC & Payment →</button>
+    <p style="font-size:0.72rem;color:var(--text3);text-align:center;margin-top:1rem">Regulated by SEBI · Funds held in escrow · 100% secure</p>
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Property filter
+  function filterProps(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.property-card').forEach(card => {
+      if (type === 'all' || card.dataset.type === type) {
+        card.style.display = '';
+        card.style.animation = 'fadeSlideUp 0.4s ease both';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Modal
+  let currentIrr = 14;
+  function openModal(name, loc, val, irr, min) {
+    document.getElementById('modalTitle').textContent = name;
+    document.getElementById('modalLoc').textContent = '📍 ' + loc;
+    document.getElementById('modalVal').textContent = val;
+    document.getElementById('modalIrr').textContent = irr;
+    document.getElementById('modalAmount').value = '';
+    document.getElementById('sharesOut').textContent = '—';
+    document.getElementById('incomeOut').textContent = '—';
+    currentIrr = parseFloat(irr);
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('open');
+    }
+  }
+  function calcShares() {
+    const amt = parseFloat(document.getElementById('modalAmount').value);
+    if (!amt || amt < 5000) {
+      document.getElementById('sharesOut').textContent = '—';
+      document.getElementById('incomeOut').textContent = '—';
+      return;
+    }
+    const shares = Math.floor(amt / 5000);
+    const income = Math.round(amt * (currentIrr / 100));
+    document.getElementById('sharesOut').textContent = shares.toLocaleString('en-IN') + ' shares';
+    document.getElementById('incomeOut').textContent = '₹' + income.toLocaleString('en-IN') + '/yr';
+  }
+
+  // Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Message Sent! We\'ll call you within 24 hours.';
+    btn.style.background = 'var(--accent2)';
+    setTimeout(() => {
+      btn.textContent = 'Send Message & Get a Callback →';
+      btn.style.background = '';
+    }, 4000);
+  }
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.height = window.scrollY > 50 ? '60px' : '70px';
+  });
+</script>
+
+</body>
+</html>
