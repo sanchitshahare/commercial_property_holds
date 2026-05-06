@@ -1,0 +1,20 @@
+﻿/* variables.css */
+:root {
+    --bg: #080C0F;
+    --bg2: #0D1318;
+    --bg3: #131B22;
+    --bg4: #1A2530;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00D4A0;
+    --accent2: #00A87D;
+    --accent3: rgba(0,212,160,0.12);
+    --gold: #D4A200;
+    --gold2: rgba(212,162,0,0.12);
+    --text: #E8EDF2;
+    --text2: #8B96A0;
+    --text3: #5A6470;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }

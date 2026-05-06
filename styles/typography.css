@@ -1,0 +1,32 @@
+﻿/* typography.css */
+body {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.section-title,
+.hero h1,
+.property-name,
+.contact-info h2,
+.modal-title,
+.nav-logo {
+  font-family: var(--font-display);
+}
+
+code,
+pre,
+.hero-tag,
+.section-label,
+.ticker-item,
+.property-location,
+.property-meta-val,
+.plan-name,
+.footer-col h4,
+.hero-stat-label {
+  font-family: var(--font-mono);
+}

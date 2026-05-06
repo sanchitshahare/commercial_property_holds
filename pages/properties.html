@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">  <title>Properties | Commercial Property Holds</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <nav aria-label="Primary navigation">
+      <a href="../index.html#home" class="nav-logo" aria-label="Commercial Property Holds home">
+        <span class="nav-logo-dot" aria-hidden="true"></span>
+        CPH
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#features">Features</a></li>
+        <li><a href="../index.html#properties">Properties</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../index.html#testimonials">Reviews</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Get Started</a></li>
+      </ul>
+      <a href="../index.html#contact" class="nav-mobile-cta">Get Started</a>
+    </nav>
+  </header>
+  <main>
+    <section class="properties" id="properties" aria-labelledby="properties-page-title">
+      <div class="properties-header">
+        <div>
+          <div class="section-label">Live Listings</div>
+          <h1 class="section-title" id="properties-page-title">Featured Properties</h1>
+          <p class="section-sub">The live listings view mirrors the homepage inventory and keeps the same filters, cards, and investment flow.</p>
+        </div>
+        <div class="properties-filters">
+          <button class="filter-btn active" type="button" onclick="filterProps('all', this)">All</button>
+          <button class="filter-btn" type="button" onclick="filterProps('active', this)">Active</button>
+          <button class="filter-btn" type="button" onclick="filterProps('new', this)">New</button>
+        </div>
+      </div>
+      <div class="properties-grid" id="propertiesGrid">
+
+
+    <div class="property-card" data-type="active" onclick="openModal('Hinjewadi Tech Corridor','Pune','₹8.4 Cr','14.8%','₹5,000')">
+      <div class="property-img" style="background: linear-gradient(135deg, #0D2A1A 0%, #0A1F2E 100%);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 300 180" width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#0a1a12"/>
+            <rect x="20" y="100" width="40" height="80" fill="#0D3520" rx="3"/>
+            <rect x="30" y="80" width="20" height="80" fill="#0F4028" rx="3"/>
+            <rect x="70" y="90" width="35" height="90" fill="#0D3520" rx="3"/>
+            <rect x="80" y="70" width="15" height="100" fill="#155234" rx="3"/>
+            <rect x="120" y="60" width="50" height="120" fill="#0D3520" rx="3"/>
+            <rect x="135" y="40" width="20" height="140" fill="#0F4028" rx="3"/>
+            <rect x="185" y="80" width="40" height="100" fill="#0D3520" rx="3"/>
+            <rect x="240" y="95" width="40" height="85" fill="#0D3520" rx="3"/>
+            <rect x="0" y="155" width="300" height="25" fill="#071510"/>
+            <line x1="0" y1="155" x2="300" y2="155" stroke="#00D4A030" stroke-width="1"/>
+            <circle cx="45" cy="95" r="2" fill="#00D4A0" opacity="0.6"/>
+            <circle cx="90" cy="68" r="2" fill="#00D4A0" opacity="0.6"/>
+            <circle cx="140" cy="38" r="2" fill="#00D4A0" opacity="0.8"/>
+            <circle cx="195" cy="75" r="2" fill="#00D4A0" opacity="0.5"/>
+            <circle cx="250" cy="92" r="2" fill="#00D4A0" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="property-img-overlay"></div>
+        <span class="property-badge badge-active">Active</span>
+        <span class="property-roi">14.8% IRR</span>
+      </div>
+      <div class="property-body">
+        <div class="property-location">📍 Hinjewadi, Pune</div>
+        <div class="property-name">Hinjewadi Tech Corridor</div>
+        <div class="property-meta">
+          <div class="property-meta-item">
+            <div class="property-meta-label">Total Size</div>
+            <div class="property-meta-val">4.2 acres</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Plot Value</div>
+            <div class="property-meta-val">₹8.4 Cr</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Tenure</div>
+            <div class="property-meta-val">5 years</div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Funded</span><span>78%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div>
+        </div>
+        <div class="property-foot">
+          <div class="min-invest">Min invest: <b>₹5,000</b></div>
+          <button class="invest-btn" type="button">Invest Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card" data-type="new" onclick="openModal('Whitefield Growth Zone','Bengaluru','₹12.1 Cr','16.2%','₹10,000')">
+      <div class="property-img" style="background: linear-gradient(135deg, #1A1A0D 0%, #2E1A0A 100%);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 300 180" width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#12100A"/>
+            <ellipse cx="150" cy="90" rx="200" ry="120" fill="#1A1400" opacity="0.5"/>
+            <rect x="10" y="110" width="280" height="70" fill="#0F0C05"/>
+            <rect x="25" y="75" width="30" height="105" fill="#201800" rx="2"/>
+            <rect x="32" y="60" width="16" height="120" fill="#2A2000" rx="2"/>
+            <rect x="65" y="85" width="25" height="95" fill="#201800" rx="2"/>
+            <rect x="100" y="55" width="45" height="125" fill="#1E1600" rx="2"/>
+            <rect x="115" y="35" width="15" height="145" fill="#2E2200" rx="2"/>
+            <rect x="155" y="70" width="35" height="110" fill="#201800" rx="2"/>
+            <rect x="200" y="80" width="30" height="100" fill="#201800" rx="2"/>
+            <rect x="240" y="90" width="40" height="90" fill="#201800" rx="2"/>
+            <line x1="0" y1="110" x2="300" y2="110" stroke="#D4A20020" stroke-width="1"/>
+            <circle cx="39" cy="57" r="2" fill="#D4A200" opacity="0.8"/>
+            <circle cx="122" cy="32" r="2.5" fill="#D4A200" opacity="0.9"/>
+            <circle cx="160" cy="67" r="2" fill="#D4A200" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="property-img-overlay"></div>
+        <span class="property-badge badge-new">New</span>
+        <span class="property-roi">16.2% IRR</span>
+      </div>
+      <div class="property-body">
+        <div class="property-location">📍 Whitefield, Bengaluru</div>
+        <div class="property-name">Whitefield Growth Zone</div>
+        <div class="property-meta">
+          <div class="property-meta-item">
+            <div class="property-meta-label">Total Size</div>
+            <div class="property-meta-val">6.8 acres</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Plot Value</div>
+            <div class="property-meta-val">₹12.1 Cr</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Tenure</div>
+            <div class="property-meta-val">7 years</div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Funded</span><span>31%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:31%"></div></div>
+        </div>
+        <div class="property-foot">
+          <div class="min-invest">Min invest: <b>₹10,000</b></div>
+          <button class="invest-btn" type="button">Invest Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card" data-type="active" onclick="openModal('ORR Industrial Strip','Hyderabad','₹6.7 Cr','13.1%','₹5,000')">
+      <div class="property-img" style="background: linear-gradient(135deg, #0D1A2A 0%, #162030 100%);">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 300 180" width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="180" fill="#090F18"/>
+            <rect x="0" y="120" width="300" height="60" fill="#060C14"/>
+            <rect x="15" y="90" width="60" height="90" fill="#0D1E32" rx="2"/>
+            <rect x="25" y="70" width="40" height="110" fill="#122440" rx="2"/>
+            <rect x="85" y="100" width="50" height="80" fill="#0D1E32" rx="2"/>
+            <rect x="95" y="75" width="30" height="105" fill="#122440" rx="2"/>
+            <rect x="145" y="65" width="55" height="115" fill="#0D1E32" rx="2"/>
+            <rect x="160" y="45" width="25" height="135" fill="#142B4D" rx="2"/>
+            <rect x="210" y="85" width="45" height="95" fill="#0D1E32" rx="2"/>
+            <rect x="265" y="100" width="35" height="80" fill="#0D1E32" rx="2"/>
+            <line x1="0" y1="120" x2="300" y2="120" stroke="#378ADD20" stroke-width="1"/>
+            <circle cx="44" cy="67" r="2" fill="#378ADD" opacity="0.7"/>
+            <circle cx="109" cy="72" r="2" fill="#378ADD" opacity="0.6"/>
+            <circle cx="172" cy="42" r="2.5" fill="#378ADD" opacity="0.9"/>
+            <circle cx="232" cy="82" r="2" fill="#378ADD" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="property-img-overlay"></div>
+        <span class="property-badge badge-active">Active</span>
+        <span class="property-roi">13.1% IRR</span>
+      </div>
+      <div class="property-body">
+        <div class="property-location">📍 ORR Zone, Hyderabad</div>
+        <div class="property-name">ORR Industrial Strip</div>
+        <div class="property-meta">
+          <div class="property-meta-item">
+            <div class="property-meta-label">Total Size</div>
+            <div class="property-meta-val">3.1 acres</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Plot Value</div>
+            <div class="property-meta-val">₹6.7 Cr</div>
+          </div>
+          <div class="property-meta-item">
+            <div class="property-meta-label">Tenure</div>
+            <div class="property-meta-val">4 years</div>
+          </div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Funded</span><span>95%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+        </div>
+        <div class="property-foot">
+          <div class="min-invest">Min invest: <b>₹5,000</b></div>
+          <button class="invest-btn" type="button">Invest Now</button>
+        </div>
+      </div>
+    </div>
+
+  
+      </div>
+    </section>
+  </main>
+  <!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html#home" class="nav-logo footer-logo">
+        <span class="nav-logo-dot" aria-hidden="true"></span>
+        Commercial Property Holds
+      </a>
+      <p>Fractional ownership in India's most promising commercial land. SEBI-registered, blockchain-secured, 100% transparent. Unlock property wealth with minimal capital.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Browse Properties</a></li>
+        <li><a href="#">Secondary Market</a></li>
+        <li><a href="#">Portfolio Tracker</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Risk Disclosure</a></li>
+        <li><a href="#">SEBI Registration</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Commercial Property Holds Technologies Pvt. Ltd. SEBI Reg. No. IN/AIF1/24-25/1234. Investments in land carry risk. Past returns ≠ future performance.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Twitter</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+</footer>
+  <!-- INVESTMENT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Invest in Property</div>
+      <button class="modal-close" type="button" aria-label="Close investment modal" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-summary">
+      <div class="modal-location" id="modalLoc"></div>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><div class="modal-meta-label">Property Value</div><div class="modal-meta-value" id="modalVal"></div></div>
+        <div class="modal-meta-item"><div class="modal-meta-label">Target IRR</div><div class="modal-meta-value modal-meta-value-accent" id="modalIrr"></div></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Investment Amount (₹)</label>
+      <input type="number" id="modalAmount" placeholder="5000" min="5000" step="1000" oninput="calcShares()">
+    </div>
+    <div class="modal-estimates">
+      <div><div class="modal-estimate-label">Shares You'll Receive</div><div class="modal-estimate-value modal-estimate-value-accent" id="sharesOut">—</div></div>
+      <div><div class="modal-estimate-label">Est. Annual Income</div><div class="modal-estimate-value" id="incomeOut">—</div></div>
+    </div>
+    <button class="btn-primary modal-action" type="button" onclick="closeModal()">Proceed to KYC &amp; Payment →</button>
+    <p class="modal-note">Regulated by SEBI · Funds held in escrow · 100% secure</p>
+  </div>
+</div>
+
+<script defer src="../scripts/utils.js"></script>
+<script defer src="../scripts/properties.js"></script>
+<script defer src="../scripts/ticker.js"></script>
+<script defer src="../scripts/animations.js"></script>
+<script defer src="../scripts/filters.js"></script>
+<script defer src="../scripts/modal.js"></script>
+<script defer src="../scripts/form.js"></script>
+<script defer src="../scripts/navigation.js"></script>
+<script defer src="../scripts/main.js"></script>
+</body>
+</html>

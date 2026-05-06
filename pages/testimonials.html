@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">  <title>Testimonials | Commercial Property Holds</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <header>
+    <nav aria-label="Primary navigation">
+      <a href="../index.html#home" class="nav-logo" aria-label="Commercial Property Holds home">
+        <span class="nav-logo-dot" aria-hidden="true"></span>
+        CPH
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#features">Features</a></li>
+        <li><a href="../index.html#properties">Properties</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+        <li><a href="../index.html#testimonials">Reviews</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Get Started</a></li>
+      </ul>
+      <a href="../index.html#contact" class="nav-mobile-cta">Get Started</a>
+    </nav>
+  </header>
+  <main>
+    <section class="testimonials" id="testimonials" aria-labelledby="testimonials-page-title">
+      <div class="testimonials-header">
+        <div class="section-label">Investor Stories</div>
+        <h1 class="section-title" id="testimonials-page-title">Trusted by thousands<br>of smart investors.</h1>
+      </div>
+      <div class="testimonials-grid">
+
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">I've been investing in real estate for 12 years, but always felt priced out of commercial land. Commercial Property Holds changed that completely. My portfolio of 4 plots has returned 16.4% in 18 months.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">RK</div>
+        <div>
+          <div class="author-name">Rahul Kulkarni</div>
+          <div class="author-meta">Software Engineer · Pune · ₹8.2L invested</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">The due diligence process is very thorough. I asked about a specific corridor in Hyderabad and got a detailed title report within 24 hours. This feels like institutional-quality access.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">PA</div>
+        <div>
+          <div class="author-name">Priya Anand</div>
+          <div class="author-meta">CA & Investor · Bengaluru · ₹21L invested</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Sold half my shares on the secondary market when I needed liquidity. Took exactly 18 days and I got a 22% gain on top of the quarterly distributions I'd already received. Truly passive.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MS</div>
+        <div>
+          <div class="author-name">Manoj Sharma</div>
+          <div class="author-meta">Doctor · Delhi NCR · ₹15L invested</div>
+        </div>
+      </div>
+    </div>
+  
+      </div>
+    </section>
+  </main>
+  <!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html#home" class="nav-logo footer-logo">
+        <span class="nav-logo-dot" aria-hidden="true"></span>
+        Commercial Property Holds
+      </a>
+      <p>Fractional ownership in India's most promising commercial land. SEBI-registered, blockchain-secured, 100% transparent. Unlock property wealth with minimal capital.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Browse Properties</a></li>
+        <li><a href="#">Secondary Market</a></li>
+        <li><a href="#">Portfolio Tracker</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Risk Disclosure</a></li>
+        <li><a href="#">SEBI Registration</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Commercial Property Holds Technologies Pvt. Ltd. SEBI Reg. No. IN/AIF1/24-25/1234. Investments in land carry risk. Past returns ≠ future performance.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Twitter</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+</footer>
+  <!-- INVESTMENT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Invest in Property</div>
+      <button class="modal-close" type="button" aria-label="Close investment modal" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-summary">
+      <div class="modal-location" id="modalLoc"></div>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><div class="modal-meta-label">Property Value</div><div class="modal-meta-value" id="modalVal"></div></div>
+        <div class="modal-meta-item"><div class="modal-meta-label">Target IRR</div><div class="modal-meta-value modal-meta-value-accent" id="modalIrr"></div></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Investment Amount (₹)</label>
+      <input type="number" id="modalAmount" placeholder="5000" min="5000" step="1000" oninput="calcShares()">
+    </div>
+    <div class="modal-estimates">
+      <div><div class="modal-estimate-label">Shares You'll Receive</div><div class="modal-estimate-value modal-estimate-value-accent" id="sharesOut">—</div></div>
+      <div><div class="modal-estimate-label">Est. Annual Income</div><div class="modal-estimate-value" id="incomeOut">—</div></div>
+    </div>
+    <button class="btn-primary modal-action" type="button" onclick="closeModal()">Proceed to KYC &amp; Payment →</button>
+    <p class="modal-note">Regulated by SEBI · Funds held in escrow · 100% secure</p>
+  </div>
+</div>
+
+<script defer src="../scripts/utils.js"></script>
+<script defer src="../scripts/properties.js"></script>
+<script defer src="../scripts/ticker.js"></script>
+<script defer src="../scripts/animations.js"></script>
+<script defer src="../scripts/filters.js"></script>
+<script defer src="../scripts/modal.js"></script>
+<script defer src="../scripts/form.js"></script>
+<script defer src="../scripts/navigation.js"></script>
+<script defer src="../scripts/main.js"></script>
+</body>
+</html>
