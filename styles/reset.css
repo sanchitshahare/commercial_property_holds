@@ -23,7 +23,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 6vw;
     height: 70px;
-    background: rgba(8,12,15,0.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     transition: all 0.3s;

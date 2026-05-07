@@ -41,7 +41,7 @@
   .property-card:hover {
     border-color: var(--border2);
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 60px var(--card-shadow);
   }
   .property-img {
     height: 200px;
@@ -131,4 +131,4 @@
     transition: all 0.2s;
     letter-spacing: 0.01em;
   }
-  .invest-btn:hover { background: var(--accent); color: #000; }
+  .invest-btn:hover { background: var(--accent); color: var(--button-text); }

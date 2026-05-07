@@ -1,4 +1,8 @@
 function initializeApp() {
+  if (typeof initTheme === 'function') {
+    initTheme();
+  }
+
   if (typeof initTicker === 'function') {
     initTicker();
   }

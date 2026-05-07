@@ -27,7 +27,7 @@
     content: 'Most Popular';
     position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
     background: var(--accent);
-    color: #000;
+    color: var(--button-text);
     font-size: 0.72rem;
     font-weight: 600;
     font-family: var(--font-mono);
@@ -101,7 +101,7 @@
   .plan-cta-outline:hover { background: var(--bg4); border-color: var(--text3); }
   .plan-cta-solid {
     background: var(--accent);
-    color: #000;
+    color: var(--button-text);
     border: none;
   }
-  .plan-cta-solid:hover { background: #00FFBF; box-shadow: 0 4px 20px rgba(0,212,160,0.3); }
+  .plan-cta-solid:hover { background: var(--accent-hover); box-shadow: 0 4px 20px rgba(0,212,160,0.3); }
