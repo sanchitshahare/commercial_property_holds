@@ -36,30 +36,41 @@
       const container = document.getElementById(containerId);
       if (container) {
         container.innerHTML = html;
+        return true;
       } else {
         console.warn(`Container #${containerId} not found for component ${componentName}`);
       }
     } catch (error) {
       console.error(`Error loading component ${componentName}:`, error);
     }
+
+    return false;
   }
 
   // Load all components when DOM is ready
   function initComponents() {
+    const componentLoads = [];
+
     // Load navigation
     if (document.getElementById('nav-container')) {
-      loadComponent('nav', 'nav-container');
+      componentLoads.push(loadComponent('nav', 'nav-container'));
     }
     
     // Load footer
     if (document.getElementById('footer-container')) {
-      loadComponent('footer', 'footer-container');
+      componentLoads.push(loadComponent('footer', 'footer-container'));
     }
     
     // Load modals
     if (document.getElementById('modals-container')) {
-      loadComponent('modals', 'modals-container');
+      componentLoads.push(loadComponent('modals', 'modals-container'));
     }
+
+    window.componentsReady = Promise.all(componentLoads).then(() => {
+      document.dispatchEvent(new CustomEvent('components:loaded'));
+    });
+
+    return window.componentsReady;
   }
 
   // Initialize when DOM is ready

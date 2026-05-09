@@ -1,4 +1,12 @@
+let appInitialized = false;
+
 function initializeApp() {
+  if (appInitialized) {
+    return;
+  }
+
+  appInitialized = true;
+
   if (typeof initTheme === 'function') {
     initTheme();
   }
@@ -28,8 +36,17 @@ function initializeApp() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
-} else {
+function initializeAppWhenReady() {
+  if (window.componentsReady && typeof window.componentsReady.then === 'function') {
+    window.componentsReady.then(initializeApp);
+    return;
+  }
+
   initializeApp();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeAppWhenReady, { once: true });
+} else {
+  initializeAppWhenReady();
 }
